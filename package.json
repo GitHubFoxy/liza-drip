@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "check": "biome check .",
+    "fix": "biome check --write .",
+    "format": "biome format --write ."
   },
   "repository": {
     "type": "git",
@@ -17,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/GitHubFoxy/liza-drip/issues"
   },
-  "homepage": "https://github.com/GitHubFoxy/liza-drip#readme"
+  "homepage": "https://github.com/GitHubFoxy/liza-drip#readme",
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.14"
+  }
 }
