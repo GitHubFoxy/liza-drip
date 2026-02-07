@@ -221,12 +221,14 @@
         const lens = document.getElementById("cursorLens");
 
         // Configuration
-        const radiusPx = 92; // lens radius
-        const lerpFactor = 0.14; // smaller = more trailing
+        const radiusPx = 112; // lens radius
+        const lerpFactorMouse = 0.34; // bigger = snappier tracking
+        const lerpFactorTouch = 0.18; // a bit smoother to hide touch jitter
 
         // State
         let rafId = null;
         let active = false;
+        let lerpFactor = lerpFactorMouse;
 
         // Target position (where the mouse is)
         let tx = 0;
@@ -246,6 +248,9 @@
         const lerp = (a, b, t) => a + (b - a) * t;
 
         function setTargetFromEvent(e) {
+          // Mouse should feel immediate; touch benefits from a little smoothing.
+          lerpFactor = e.pointerType === "mouse" ? lerpFactorMouse : lerpFactorTouch;
+
           const rect = stage.getBoundingClientRect();
           tx = e.clientX - rect.left;
           ty = e.clientY - rect.top;
